@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galerie Interactive</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f3f3f3;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+
+  header {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    font-size: 1.8em;
+  }
+
+  main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    gap: 15px;
+  }
+
+  figure {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    width: 250px;
+    transition: transform 0.3s;
+  }
+
+  figure:hover {
+    transform: scale(1.05);
+  }
+
+  figure img {
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  figcaption {
+    padding: 10px;
+    font-size: 1em;
+  }
+
+  footer {
+    background-color: #333;
+    color: white;
+    padding: 15px;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body onload="initGalerie()">
+
+<header> Galerie de Photos Interactive </header>
+
+<main id="galerie">
+  <figure>
+    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" alt="Paysage de montagne au lever du soleil">
+    <figcaption>Montagne au lever du soleil</figcaption>
+  </figure>
+  <figure>
+    <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70" alt="Fleur rose en macro">
+    <figcaption>vie rose</figcaption>
+  </figure>
+  <figure>
+    <img src="https://images.unsplash.com/photo-1494783367193-149034c05e8f" alt="Forêt verte et lumière du soleil">
+    <figcaption>Forêt verte</figcaption>
+  </figure>
+  <figure>
+    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Plage au coucher du soleil">
+    <figcaption>Plage </figcaption>
+  </figure>
+</main>
+
+
+
+<script>
+function initGalerie() {
+  console.log("Page chargée !");
+  const figures = document.querySelectorAll("figure");
+
+
+  figures.forEach((fig, index) => {
+    fig.setAttribute("tabindex", index + 1);
+
+    
+    fig.addEventListener("mouseenter", () => {
+      fig.style.boxShadow = "0 0 15px 5px #ffb347";
+    });
+    fig.addEventListener("mouseleave", () => {
+      fig.style.boxShadow = "0 2px 10px rgba(0,0,0,0.2)";
+    });
+
+
+    fig.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        alert("Vous avez sélectionné : " + fig.querySelector("figcaption").innerText);
+      }
+    });
+  });
+
+
+  document.addEventListener("mousemove", (e) => {
+    document.title = "Souris : " + e.clientX + "," + e.clientY;
+  });
+}
+</script>
+
+</body>
+</html>
